@@ -19,7 +19,7 @@ php yii migrate --migrationPath=@vendor/frenzelgmbh/cmcommunication/migrations
 Inside your yii-config, pls. add the following lines to your modules section. As you
 might see, the gridview needs to be implemented too.
 ```
-'address'=>[
+'communication'=>[
   'class' => 'frenzelgmbh\cmcommunication\Module',
 ],
 'gridview' =>  [
@@ -29,7 +29,7 @@ might see, the gridview needs to be implemented too.
 
 After this, you should be able to see the set of build in widgets and options under:
 
-http://yourhost/index.php?r=address/default/test
+http://yourhost/index.php?r=communication/default/test
 
 Design
 ======
@@ -39,12 +39,6 @@ So in general all modules are referenced by:
 
 * mod_table (which should hold the table name VARCHAR(100))
 * mod_id    (which should hold the primarey key of the referenced record INTEGER(11))
-
-Geolocation
-===========
-
-The module tries to enrich each passed over address with the latitude and longitude, which will be looked
-up by combining street, address and state information.
 
 
 Widgets
@@ -67,12 +61,5 @@ if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid')){
     'module'      => 'tbl_test',
     'id'          => 1
   )); 
-}
-```
-
-Visitors IP Location:
-```php
-if(class_exists('\frenzelgmbh\cmcommunication\widgets\IPLocation')){
-  echo \frenzelgmbh\cmcommunication\widgets\IPLocation::widget(); 
 }
 ```
