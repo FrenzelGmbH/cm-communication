@@ -46,8 +46,8 @@ Widgets
 
 The "create"-Button:
 ```php
-if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateAddressModal')){
-  echo \frenzelgmbh\cmcommunication\widgets\CreateAddressModal::widget(array(
+if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal')){
+  echo \frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal::widget(array(
     'module'      => 'tbl_test',
     'id'          => 1
   )); 
@@ -56,8 +56,8 @@ if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateAddressModal')){
 
 The "related"-Grid:
 ```php
-if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid')){
-  echo \frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid::widget(array(
+if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedCommunicationGrid')){
+  echo \frenzelgmbh\cmcommunication\widgets\RelatedCommunicationGrid::widget(array(
     'module'      => 'tbl_test',
     'id'          => 1
   )); 
