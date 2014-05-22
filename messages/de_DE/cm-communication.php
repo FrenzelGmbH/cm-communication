@@ -27,5 +27,10 @@ return [
    'Status'     => 'Status',
    //General Fields
    'Created at' => 'erstellt am',
-   'Deleted at' => 'entfernt am'
+   'Deleted at' => 'entfernt am',
+   //Devices
+   'Mobile'     => 'Handy',
+   'Email'      => 'E-Mail',
+   'Fax'        => 'Fax',
+   'Phone'      => 'Telefon'
 ];

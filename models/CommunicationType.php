@@ -3,6 +3,8 @@
 namespace frenzelgmbh\cmcommunication\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "communication_type".
@@ -32,6 +34,16 @@ class CommunicationType extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -47,15 +59,15 @@ class CommunicationType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('cm-communication', 'ID'),
-            'name' => Yii::t('cm-communication', 'Name'),
-            'user_id' => Yii::t('cm-communication', 'User ID'),
-            'system_key' => Yii::t('cm-communication', 'System Key'),
-            'system_name' => Yii::t('cm-communication', 'System Name'),
+            'id'           => Yii::t('cm-communication', 'ID'),
+            'name'         => Yii::t('cm-communication', 'Name'),
+            'user_id'      => Yii::t('cm-communication', 'User ID'),
+            'system_key'   => Yii::t('cm-communication', 'System Key'),
+            'system_name'  => Yii::t('cm-communication', 'System Name'),
             'system_upate' => Yii::t('cm-communication', 'System Upate'),
-            'created_at' => Yii::t('cm-communication', 'Created At'),
-            'updated_at' => Yii::t('cm-communication', 'Updated At'),
-            'deleted_at' => Yii::t('cm-communication', 'Deleted At'),
+            'created_at'   => Yii::t('cm-communication', 'Created At'),
+            'updated_at'   => Yii::t('cm-communication', 'Updated At'),
+            'deleted_at'   => Yii::t('cm-communication', 'Deleted At'),
         ];
     }
 

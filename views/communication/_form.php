@@ -1,9 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 use frenzelgmbh\cmcommunication\models\CommunicationType;
 
+use kartik\widgets\ActiveForm;
 use kartik\widgets\Select2
 
 /**
@@ -26,14 +27,35 @@ use kartik\widgets\Select2
             ],
         ]);
     ?>
-
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => 200]) ?>
-
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => 200]) ?>
-
-    <?= $form->field($model, 'fax')->textInput(['maxlength' => 200]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => 200]) ?>
+    
+    <div class="row">
+        <div class="col-md-6">
+    <?= $form->field($model, 'mobile',[
+            'addon' => ['prepend' => ['content'=>'<i class="glyphicon glyphicon-phone"></i>']]
+        ])->textInput(['maxlength' => 200]) 
+    ?>        
+        </div>
+        <div class="col-md-6">
+    <?= $form->field($model, 'phone',[
+            'addon' => ['prepend' => ['content'=>'<i class="glyphicon glyphicon-phone-alt"></i>']]
+        ])->textInput(['maxlength' => 200]) 
+    ?>        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+    <?= $form->field($model, 'email',[
+            'addon' => ['prepend' => ['content'=>'@']]
+        ])->textInput(['maxlength' => 200]) 
+    ?>        
+        </div>
+        <div class="col-md-6">
+    <?= $form->field($model, 'fax',[
+            'addon' => ['prepend' => ['content'=>'<i class="glyphicon glyphicon-print"></i>']]
+        ])->textInput(['maxlength' => 200]) 
+    ?>       
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
