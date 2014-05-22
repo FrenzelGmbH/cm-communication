@@ -79,7 +79,7 @@ class Communication extends \yii\db\ActiveRecord
             'created_at'            => Yii::t('cm-communication', 'Created At'),
             'updated_at'            => Yii::t('cm-communication', 'Updated At'),
             'deleted_at'            => Yii::t('cm-communication', 'Deleted At'),
-            'communication_type_id' => Yii::t('cm-communication', 'Communication Type ID'),
+            'communication_type_id' => Yii::t('cm-communication', 'Communication Type'),
         ];
     }
 
