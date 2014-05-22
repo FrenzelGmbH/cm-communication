@@ -40,6 +40,16 @@ So in general all modules are referenced by:
 * mod_table (which should hold the table name VARCHAR(100))
 * mod_id    (which should hold the primarey key of the referenced record INTEGER(11))
 
+Datastructure
+=============
+This module allows you to store communication data related to any other "record" and "module" you pass by as parameters.
+It allows you to save 1:n communication records, while one record of communication can be filled with the following fields:
+* Communication Type (INTEGER) References communication_type table
+* Phone
+* Mobile
+* Fax
+* EMail
+Pls. notice, that records aren't deleted in all of our models, they just get marked as deleted!
 
 Widgets
 =======
