@@ -22,6 +22,7 @@ use yii\bootstrap\Modal;
 Modal::begin([
   'id'=>'ccomtype',
   'header' => '<i class="fa fa-info"></i>Loading...',
+  'closeButton' => ['tag'=>'button','label'=>'close']
 ]);
 echo 'pls. wait one moment...';
 Modal::end();
