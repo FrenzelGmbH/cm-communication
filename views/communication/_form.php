@@ -13,6 +13,33 @@ use kartik\widgets\Select2
  */
 ?>
 
+<?php 
+  
+Modal::begin([
+  'id'=>'ccomtype',
+  'header' => '<i class="fa fa-info"></i>Loading...',
+]);
+echo 'pls. wait one moment...';
+Modal::end();
+
+$modalJS = <<<MODALJS
+
+openccomtypemod = function(){
+    var th=$(this), id=th.attr('id').slice(0);  
+    $('#ccomtype').modal('show');
+    $('#ccomtype div.modal-header').html('Add Address');
+    $('#ccomtype div.modal-body').load(th.attr('href'));
+    return false;
+};
+
+$('#mod_address_add').on('click',openaddressmod);
+
+MODALJS;
+
+  $this->registerJs($modalJS);
+
+?>
+
 <div class="communication-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -29,9 +56,11 @@ use kartik\widgets\Select2
                 ],
                 'append' => [
                     'content' => Html::button(Html::icon('plus'), [
-                        'class'=>'btn btn-primary', 
+                        'class'=>'btn btn-default',
+                        'id'   => 'mod_communication_type_add', 
                         'title'=>'add new type', 
-                        'data-toggle'=>'tooltip'
+                        'data-toggle'=>'tooltip',
+                        'url' => '#'
                     ]),
                     'asButton'=>true
                 ]
