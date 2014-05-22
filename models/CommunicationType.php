@@ -66,4 +66,13 @@ class CommunicationType extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Communication::className(), ['communication_type_id' => 'id']);
     }
+
+    /**
+     * returns the data for a form pull down
+     * @return [type] [description]
+     */
+    public static function pdCommunicationType()
+    {
+        return ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name');
+    }
 }
