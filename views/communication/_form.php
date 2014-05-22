@@ -1,9 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 use frenzelgmbh\cmcommunication\models\CommunicationType;
 
+use kartik\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\Select2
 
@@ -21,7 +20,22 @@ use kartik\widgets\Select2
     <?php
         echo $form->field($model, 'communication_type_id')->widget(Select2::classname(), [
             'data' => array_merge(["" => ""], CommunicationType::pdCommunicationType()),
-            'options' => ['placeholder' => 'Communication Type...'],
+            'options' => [
+                'placeholder' => 'Communication Type...'                
+            ],
+            'addon' => [
+                'prepend' => [
+                    'content' => Html::icon('globe')
+                ],
+                'append' => [
+                    'content' => Html::button(Html::icon('plus'), [
+                        'class'=>'btn btn-primary', 
+                        'title'=>'add new type', 
+                        'data-toggle'=>'tooltip'
+                    ]),
+                    'asButton'=>true
+                ]
+            ],
             'pluginOptions' => [
                 'allowClear' => true
             ],
