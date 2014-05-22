@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
@@ -12,7 +13,9 @@ use yii\widgets\ActiveForm;
 
 <div class="communication-type-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => Url::to(['/communication/communication-type/create']),
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 100]) ?>
 
