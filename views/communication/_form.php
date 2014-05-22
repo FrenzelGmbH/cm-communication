@@ -1,10 +1,14 @@
 <?php
 
+use yii\helpers\Url;
+
 use frenzelgmbh\cmcommunication\models\CommunicationType;
 
 use kartik\helpers\Html;
 use kartik\widgets\ActiveForm;
-use kartik\widgets\Select2
+use kartik\widgets\Select2;
+
+use yii\bootstrap\Modal;
 
 /**
  * @var yii\web\View $this
@@ -32,7 +36,7 @@ openccomtypemod = function(){
     return false;
 };
 
-$('#mod_address_add').on('click',openaddressmod);
+$('#mod_communication_type_add').on('click',openccomtypemod);
 
 MODALJS;
 
@@ -60,7 +64,7 @@ MODALJS;
                         'id'   => 'mod_communication_type_add', 
                         'title'=>'add new type', 
                         'data-toggle'=>'tooltip',
-                        'url' => '#'
+                        'href' => Url::to(['/communication/communication-type/create'])
                     ]),
                     'asButton'=>true
                 ]
