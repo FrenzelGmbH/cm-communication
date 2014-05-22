@@ -14,6 +14,12 @@ use yii\filters\VerbFilter;
  */
 class CommunicationTypeController extends Controller
 {
+    /**
+     * Set the default layout to the modules view column2
+     * @var string
+     */
+    public $layout = 'column2';
+
     public function behaviors()
     {
         return [
@@ -65,7 +71,7 @@ class CommunicationTypeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
