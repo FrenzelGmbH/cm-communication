@@ -7,6 +7,7 @@ use frenzelgmbh\cmcommunication\models\CommunicationType;
 use frenzelgmbh\cmcommunication\models\CommunicationTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Json;
 use yii\filters\VerbFilter;
 
 /**
