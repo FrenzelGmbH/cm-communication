@@ -48,7 +48,6 @@ class CommunicationType extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'system_upate', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
             [['name', 'system_key', 'system_name'], 'string', 'max' => 100]
         ];
     }

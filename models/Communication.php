@@ -53,7 +53,6 @@ class Communication extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'mod_id', 'system_upate', 'created_at', 'updated_at', 'deleted_at', 'communication_type_id'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
             [['mobile', 'phone', 'fax', 'email'], 'string', 'max' => 200],
             [['mod_table', 'system_key', 'system_name'], 'string', 'max' => 100]
         ];
