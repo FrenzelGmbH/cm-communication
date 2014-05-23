@@ -64,7 +64,7 @@ class CommunicationController extends Controller
         $model = new Communication;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if (\Yii::$app->request->isAjax) 
+            if (Yii::$app->request->isAjax) 
             {
                 header('Content-type: application/json');
                 echo Json::encode(['status'=>'DONE','model'=>$model]);
