@@ -69,7 +69,16 @@ class CommunicationTypeController extends Controller
         $model = new CommunicationType;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if (\Yii::$app->request->isAjax) 
+            {
+                header('Content-type: application/json');
+                echo Json::encode(['status'=>'DONE','model'=>$model]);
+                exit();
+            }
+            else
+            {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
