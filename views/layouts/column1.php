@@ -1,4 +1,4 @@
-<?php $this->beginContent('@app/views/layouts/'.\frenzelgmbh\cmcommunication\Module::getMainLayout().'.php'); ?>
+<?php $this->beginContent('@app/views/layouts/main.php'); ?>
 <div id="content">
   <div class="cm-communication">
     <?= $content; ?>
