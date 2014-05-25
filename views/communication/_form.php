@@ -29,6 +29,13 @@ Modal::end();
 
 $modalJS = <<<MODALJS
 
+appendcomtype = function(data){
+    var model = data.model;
+    var s2data = $('#communication-communication_type_id').select2('data');
+    s2data.push({id:model.id,text:model.name});
+    $('#communication-communication_type_id').select2('data',s2data,true);
+}
+
 openccomtypemod = function(){
     var th=$(this), id=th.attr('id').slice(0);  
     $('#ccomtype').modal('show');
@@ -71,7 +78,7 @@ MODALJS;
                 ]
             ],
             'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
             ],
         ]);
     ?>

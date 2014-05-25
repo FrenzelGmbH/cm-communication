@@ -17,6 +17,7 @@ $('#submitCommunicationType').on('click',function(event){
   {
     type : "POST",
     success: function(data){
+      appendcomtype(data);
       $('#ccomtype').modal('hide');
     }
   });
