@@ -31,9 +31,7 @@ $modalJS = <<<MODALJS
 
 appendcomtype = function(data){
     var model = data.model;
-    var s2data = $('#communication-communication_type_id').select2('data');
-    s2data.push({id:model.id,text:model.name});
-    $('#communication-communication_type_id').select2('data',s2data,true);
+    $('#communication-communication_type_id').append('<option value="' + model.id + '">' + model.name + '</option>');
 }
 
 openccomtypemod = function(){
