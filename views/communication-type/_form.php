@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use kartik\widgets\ActiveForm;
 
+//suppress reload of existing asstes in main window
+$this->assetBundles['yii\bootstrap\BootstrapAsset'] = new yii\web\AssetBundle;
+
 /**
  * @var yii\web\View $this
  * @var app\models\CommunicationType $model
