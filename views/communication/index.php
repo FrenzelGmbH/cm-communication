@@ -64,7 +64,7 @@ Pjax::begin();
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Communicatinos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Communications</h3>',
             'type' => 'success',
             'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Communication', ['create'], ['class' => 'btn btn-success']),
             'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
