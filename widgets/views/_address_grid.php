@@ -20,16 +20,14 @@ Pjax::begin();
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'responsive' => true,
-        'hover' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'zipCode',
-            'cityName',
-            //'postBox',
-            'addresslineOne',
-            'addresslineTwo',
-            // 'regionName',
+            //'id',
+            'mobile',
+            'phone',
+            'fax',
+            'email:email',
             // 'user_id',
             // 'mod_table',
             // 'mod_id',
@@ -38,11 +36,19 @@ Pjax::begin();
             // 'system_upate',
             // 'created_at',
             // 'updated_at',
-            // 'country_id',
+            // 'deleted_at',
+            // 'communication_type_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]);
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Communicatinos</h3>',
+            'type' => 'success',
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Communication', ['create'], ['class' => 'btn btn-success']),
+            'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+            'showFooter' => false
+        ]
+    ]); 
 
 Pjax::end(); 
 ?>

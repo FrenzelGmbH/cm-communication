@@ -41,6 +41,7 @@ Pjax::begin();
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'responsive' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
