@@ -29,7 +29,7 @@ $this->title = Yii::t('cm-communication', 'test');
 		<?php 
       if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateAddressModal')){
         echo \frenzelgmbh\cmcommunication\widgets\CreateAddressModal::widget(array(
-          'module'      => 'cm_address_test',
+          'module'      => 1,
           'id'          => 1
         )); 
       }
@@ -52,7 +52,7 @@ $this->title = Yii::t('cm-communication', 'test');
     <?php 
       if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid')){
         echo \frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid::widget(array(
-          'module'      => 'cm_address_test',
+          'module'      => 1,
           'id'          => 1
         )); 
       }
