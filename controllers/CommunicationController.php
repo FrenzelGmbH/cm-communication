@@ -15,6 +15,12 @@ use yii\filters\VerbFilter;
  */
 class CommunicationController extends Controller
 {
+    /**
+     * Set the default layout to the modules view column2
+     * @var string
+     */
+    public $layout = 'column2';
+
     public function behaviors()
     {
         return [

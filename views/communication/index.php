@@ -1,8 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-
+use yii\helpers\Url;
+use kartik\grid\GridView;
+use kartik\widgets\SideNav;
+use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
@@ -12,24 +14,37 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Communications');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="communication-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php yii\widgets\Block::begin(array('id'=>'sidebar')); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Communication',
-]), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php 
+    $sideMenu = array();
+    $sideMenu[] = array('icon'=>'book','label'=>Yii::t('cm-communication','Communications'),'url'=>Url::to(array('/communication/communication/index')));
+    $sideMenu[] = array('icon'=>'plus','label'=>Yii::t('cm-communication','New Communication'),'url'=>Url::to(array('/communication/communication/create')));
+    $sideMenu[] = array('icon'=>'tower','label'=>Yii::t('cm-communication','Playground'),'url'=>Url::to(array('/communication/default/test')));
 
-    <?= GridView::widget([
+    echo SideNav::widget([
+      'type' => SideNav::TYPE_INFO,
+      'heading' => \Yii::t('cm-communication','Communication Menu'),
+      'items' => $sideMenu
+    ]);
+  ?>
+
+<?php yii\widgets\Block::end(); ?>
+
+<div class="workbench">
+
+    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+
+    <?php
+Pjax::begin();
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'mobile',
             'phone',
             'fax',
@@ -47,6 +62,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Communicatinos</h3>',
+            'type' => 'success',
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Communication', ['create'], ['class' => 'btn btn-success']),
+            'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+            'showFooter' => false
+        ]
+    ]); 
+Pjax::end();
+?>
 
 </div>

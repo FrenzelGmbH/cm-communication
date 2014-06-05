@@ -13,7 +13,12 @@ use frenzelgmbh\cmcommunication\models\Country;
 
 class DefaultController extends AppController
 {
-  
+  /**
+   * Set the default layout to the modules view column2
+   * @var string
+   */
+  public $layout = 'column2';
+
   /**
    * controlling the different access rights
    * @return [type] [description]
@@ -38,7 +43,7 @@ class DefaultController extends AppController
               'create',
               'jscountry'
             ),
-            'roles'=>array('*'),
+            'roles'=>array('@'),
           ],
           [
             'allow'=>true,
