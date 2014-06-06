@@ -40,6 +40,7 @@ class DefaultController extends AppController
               'index',
               'test',
               'create',
+              'update',
               'jscountry'
             ),
             'roles'=>array('@'),
