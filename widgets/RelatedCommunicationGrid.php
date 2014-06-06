@@ -4,13 +4,13 @@ namespace frenzelgmbh\cmcommunication\widgets;
 
 use Yii;
 
-use frenzelgmbh\cmcommunication\models\Address;
-use frenzelgmbh\cmcommunication\models\AddressSearch;
+use frenzelgmbh\cmcommunication\models\Communication;
+use frenzelgmbh\cmcommunication\models\CommunicationSearch;
 
 use frenzelgmbh\appcommon\widgets\Portlet;
 
 /**
- * Related Address Grid
+ * Related Communication Grid
  * @author Philipp Frenzel <philipp@frenzel.net>
  * @copyright Copyright (c) 2014, Frenzel GmbH
  */
@@ -55,7 +55,7 @@ class RelatedCommunicationGrid extends Portlet
 	 */
 	protected function renderContent()
 	{
-		$searchModel = new AddressSearch;
+		$searchModel = new CommunicationSearch;
     	$dataProvider = $searchModel->search(Yii::$app->request->getQueryParams(),$this->module,$this->id);
 
 	    echo $this->render('@frenzelgmbh/cmcommunication/widgets/views/_communication_grid', [
