@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 <?php 
   
 Modal::begin([
-  'id'=>'caddressmod',
+  'id'=>'ccommunicationmod',
   'header' => '<i class="fa fa-info"></i>Loading',
 ]);
 echo 'pls. wait one moment...';
@@ -16,15 +16,15 @@ Modal::end();
 
 $modalJS = <<<MODALJS
 
-openaddressmod = function(){
+opencommunicationmod = function(){
     var th=$(this), id=th.attr('id').slice(0);  
-    $('#caddressmod').modal('show');
-    $('#caddressmod div.modal-header').html('Add Address');
-    $('#caddressmod div.modal-body').load(th.attr('href'));
+    $('#ccommunicationmod').modal('show');
+    $('#ccommunicationmod div.modal-header').html('Add Communication');
+    $('#ccommunicationmod div.modal-body').load(th.attr('href'));
     return false;
 };
 
-$('#mod_address_add').on('click',openaddressmod);
+$('#mod_communication_add').on('click',opencommunicationmod);
 
 MODALJS;
 
@@ -33,12 +33,12 @@ MODALJS;
 ?>
 
 <?= Html::a(\Yii::t('app','Create'), [
-    '/address/default/create',
+    '/communication/default/create',
     'module' => $module, 
     'id' => $id,
   ], 
   [
     'class' => 'btn btn-info navbar-btn',
-    'id' => 'mod_address_add'
+    'id' => 'mod_communication_add'
   ]
 );?>

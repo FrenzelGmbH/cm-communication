@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
  */
 
 ?>
-<div class="address-grid">
+<div class="communication-grid">
 
 <?php 
 Pjax::begin();

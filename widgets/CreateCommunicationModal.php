@@ -3,30 +3,26 @@
 namespace frenzelgmbh\cmcommunication\widgets;
 
 use Yii;
-
-use frenzelgmbh\cmcommunication\models\Address;
-use frenzelgmbh\cmcommunication\models\AddressSearch;
-
 use frenzelgmbh\appcommon\widgets\Portlet;
 
 /**
- * Related Address Grid
+ * Create Address Modal Button
  * @author Philipp Frenzel <philipp@frenzel.net>
  * @copyright Copyright (c) 2014, Frenzel GmbH
  */
 
-class RelatedAddressGrid extends Portlet
+class CreateCommunicationModal extends Portlet
 {
 	/**
 	 * const WIDGET_NAME must be defined for all widgets!
 	 */
-	const WIDGET_NAME = 'RelatedAddressGrid';
+	const WIDGET_NAME = 'CreateCommunicationModal';
 	
 	/**
 	 * [$title description]
 	 * @var string title that will be displayed when enabling Admin Portlet
 	 */
-	public $title='Related Addresses';
+	public $title='Create Communication';
 	
 	/**
 	 * [$module description]
@@ -45,7 +41,7 @@ class RelatedAddressGrid extends Portlet
 	 * @return bool the result of the parent init call
 	 */
 	public function init() {		
-		\frenzelgmbh\cmcommunication\addressAsset::register(\Yii::$app->view);
+		\frenzelgmbh\cmcommunication\communicationAsset::register(\Yii::$app->view);
 		return parent::init();
 	}
 
@@ -55,13 +51,10 @@ class RelatedAddressGrid extends Portlet
 	 */
 	protected function renderContent()
 	{
-		$searchModel = new AddressSearch;
-    $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams(),$this->module,$this->id);
-
-    echo $this->render('@frenzelgmbh/cmcommunication/widgets/views/_address_grid', [
-        'dataProvider' => $dataProvider,
-        'searchModel' => $searchModel,
-    ]);
+		echo $this->render('@frenzelgmbh/cmcommunication/widgets/views/_create_modal',[
+			'module' => $this->module,
+			'id'		 => $this->id
+		]);
 	}
 
 }
