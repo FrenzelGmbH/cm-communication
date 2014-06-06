@@ -112,6 +112,41 @@ class DefaultController extends AppController
   }
 
   /**
+   * [actionUpdate description]
+   * @param string module
+   * @param integer id
+   * @return view         [description]
+   */
+  public function actionUpdate($id){
+    $model = $this->findModel($id);
+
+    if ($model->load(Yii::$app->request->post()) && $model->save()) 
+    {
+      if (\Yii::$app->request->isAjax) 
+      {
+        header('Content-type: application/json');
+        echo Json::encode(['status'=>'DONE','model'=>$model]);
+        exit();
+      }
+      else
+      {
+        return $this->redirect(['view', 'id' => $model->id]);
+      }
+    } 
+    else 
+    {
+      if(!is_null($module) && !is_null($id))
+      {
+        $model->mod_table = $module;
+        $model->mod_id = $id;  
+      }
+      return $this->renderAjax('@frenzelgmbh/cmcommunication/widgets/views/iviews/_form', [
+          'model' => $model,
+      ]);
+    }
+  }
+
+  /**
    * js(on)country returns an json object for the select2 widget
    * @param  string $search Text for the lookup
    * @param  integer of the set value
@@ -146,5 +181,21 @@ class DefaultController extends AppController
     echo Json::encode($clean);
     exit();
   }
+
+  /**
+     * Finds the Communication model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Communication the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Communication::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 
 }
