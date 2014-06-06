@@ -55,9 +55,20 @@ Widgets
 =======
 
 The "create"-Button:
+ Will render a button, that will open an modal and lets you add a new communication to the referenced module with the id. E.g. you have a entity "contact" and you want to create a new communication to this entity.
 ```php
 if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal')){
   echo \frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal::widget(array(
+    'module'      => 'tbl_test',
+    'id'          => 1
+  )); 
+}
+```
+
+The "update"-Button:
+```php
+if(class_exists('\frenzelgmbh\cmcommunication\widgets\UpdateCommunicationModal')){
+  echo \frenzelgmbh\cmcommunication\widgets\UpdateCommunicationModal::widget(array(
     'module'      => 'tbl_test',
     'id'          => 1
   )); 
