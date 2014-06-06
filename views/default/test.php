@@ -20,15 +20,15 @@ $this->title = Yii::t('cm-communication', 'test');
 		<div class="well">
 			<p>
 				Here we make the test for the create button, that will open a modal to create an 
-				asscociated address to the passed over: <br>
+				asscociated Communication to the passed over: <br>
 				* MODULE <br>
 				* ID <br>
 			</p>
 		</div>
 
 		<?php 
-      if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateAddressModal')){
-        echo \frenzelgmbh\cmcommunication\widgets\CreateAddressModal::widget(array(
+      if(class_exists('\frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal')){
+        echo \frenzelgmbh\cmcommunication\widgets\CreateCommunicationModal::widget(array(
           'module'      => 1,
           'id'          => 1
         )); 
@@ -38,20 +38,20 @@ $this->title = Yii::t('cm-communication', 'test');
 	</fieldset>
 
   <fieldset>
-    <legend>Related Address Grid</legend>
+    <legend>Related Communication Grid</legend>
 
     <div class="well">
       <p>
-        Here we make the test for the related address grid 
-        which renders an asscociated address to the passed over: <br>
+        Here we make the test for the related Communication grid 
+        which renders an asscociated Communication to the passed over: <br>
         * MODULE <br>
         * ID <br>
       </p>
     </div>
 
     <?php 
-      if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid')){
-        echo \frenzelgmbh\cmcommunication\widgets\RelatedAddressGrid::widget(array(
+      if(class_exists('\frenzelgmbh\cmcommunication\widgets\RelatedCommunicationGrid')){
+        echo \frenzelgmbh\cmcommunication\widgets\RelatedCommunicationGrid::widget(array(
           'module'      => 1,
           'id'          => 1
         )); 
