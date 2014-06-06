@@ -8,8 +8,7 @@ use yii\helpers\Json;
 
 use frenzelgmbh\appcommon\controllers\AppController;
 
-use frenzelgmbh\cmcommunication\models\Address;
-use frenzelgmbh\cmcommunication\models\Country;
+use frenzelgmbh\cmcommunication\models\Communication;
 
 class DefaultController extends AppController
 {
@@ -84,7 +83,7 @@ class DefaultController extends AppController
    * @return view         [description]
    */
   public function actionCreate($module=NULL,$id=NULL){
-    $model = new Address;
+    $model = new Communication;
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) 
     {
