@@ -5,7 +5,7 @@ namespace frenzelgmbh\cmcommunication\controllers;
 use Yii;
 use frenzelgmbh\cmcommunication\models\Communication;
 use frenzelgmbh\cmcommunication\models\CommunicationSearch;
-use yii\web\Controller;
+use frenzelgmbh\appcommon\controllers\AppController;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
 use yii\filters\VerbFilter;
@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CommunicationController implements the CRUD actions for Communication model.
  */
-class CommunicationController extends Controller
+class CommunicationController extends AppController
 {
     /**
      * Set the default layout to the modules view column2
