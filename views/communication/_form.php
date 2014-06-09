@@ -37,7 +37,7 @@ appendcomtype = function(data){
 openccomtypemod = function(){
     var th=$(this), id=th.attr('id').slice(0);  
     $('#ccomtype').modal('show');
-    $('#ccomtype div.modal-header').html('Add Address');
+    $('#ccomtype div.modal-header').html('Add Communication');
     $('#ccomtype div.modal-body').load(th.attr('href'));
     return false;
 };

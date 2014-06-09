@@ -131,7 +131,7 @@ MODALJS;
     </div>
 
     <div class="form-group navbar navbar-primary">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'],'id'=>'submitCommunicationCreate') ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','id'=>'submitCommunicationCreate']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
