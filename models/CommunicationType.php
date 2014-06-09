@@ -84,6 +84,6 @@ class CommunicationType extends \yii\db\ActiveRecord
      */
     public static function pdCommunicationType()
     {
-        return ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name');
+        return ArrayHelper::merge(['0'=>'None'],ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name'));
     }
 }
