@@ -56,7 +56,7 @@ MODALJS;
 
     <?php
         echo $form->field($model, 'communication_type_id')->widget(Select2::classname(), [
-            'data' => array_merge(["" => ""], CommunicationType::pdCommunicationType()),
+            'data' => CommunicationType::pdCommunicationType(),
             'options' => [
                 'placeholder' => 'Communication Type...'                
             ],
