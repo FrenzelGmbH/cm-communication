@@ -32,7 +32,7 @@ class Communication extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%communication}}';
+        return '{{%net_frenzel_communication}}';
     }
 
     /**
@@ -41,7 +41,19 @@ class Communication extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            \yii\behaviors\BlameableBehavior::className(),
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        return [
+            'create' => ['type', 'entity', 'entity_id', 'text', 'type'],
+            'update' => ['type' ,'text'],
         ];
     }
 
@@ -51,10 +63,9 @@ class Communication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'mod_id', 'system_upate', 'created_at', 'updated_at', 'deleted_at', 'communication_type_id'], 'integer'],
-            [['mobile', 'phone', 'fax'], 'string', 'max' => 200],
-            [['email'],'email'],
-            [['mod_table', 'system_key', 'system_name'], 'string', 'max' => 100]
+            [['text'], 'required'],
+            [['text','entity'], 'string'],
+            [['created_by', 'updated_by', 'created_at', 'updated_at','deleted_at','entity_id','type'], 'integer'],
         ];
     }
 
@@ -64,29 +75,77 @@ class Communication extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'                    => Yii::t('cm-communication', 'ID'),
-            'mobile'                => Yii::t('cm-communication', 'Mobile'),
-            'phone'                 => Yii::t('cm-communication', 'Phone'),
-            'fax'                   => Yii::t('cm-communication', 'Fax'),
-            'email'                 => Yii::t('cm-communication', 'Email'),
-            'user_id'               => Yii::t('cm-communication', 'User ID'),
-            'mod_table'             => Yii::t('cm-communication', 'Mod Table'),
-            'mod_id'                => Yii::t('cm-communication', 'Mod ID'),
-            'system_key'            => Yii::t('cm-communication', 'System Key'),
-            'system_name'           => Yii::t('cm-communication', 'System Name'),
-            'system_upate'          => Yii::t('cm-communication', 'System Upate'),
-            'created_at'            => Yii::t('cm-communication', 'Created At'),
-            'updated_at'            => Yii::t('cm-communication', 'Updated At'),
-            'deleted_at'            => Yii::t('cm-communication', 'Deleted At'),
-            'communication_type_id' => Yii::t('cm-communication', 'Communication Type'),
+            'id'         => \Yii::t('app', 'ID'),
+            'text'       => \Yii::t('app', 'Text'),
+            'entity'     => \Yii::t('app', 'Entity'),
+            'type'       => \Yii::t('app', 'Current Type'),
+            'created_by' => \Yii::t('app', 'Created by'),
+            'updated_by' => \Yii::t('app', 'Updated by'),
+            'created_at' => \Yii::t('app', 'Created at'),
+            'updated_at' => \Yii::t('app', 'Updated at'),
+            'deleted_at' => \Yii::t('app', 'Updated at'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCommunicationType()
+    public function getAuthor()
     {
-        return $this->hasOne(CommunicationType::className(), ['id' => 'communication_type_id']);
+        $Module = \Yii::$app->getModule('activity');
+        return $this->hasOne($Module->userIdentityClass, ['id' => 'created_by']);
+    }
+
+    /**
+     * Delete communication
+     *
+     * @return boolean communication was deleted or not
+     */
+    public function deleteCommunication()
+    {
+        $this->touch('deleted_at');
+        $this->text = '';
+        return $this->save(false, ['deleted_at', 'text']);
+    }
+
+    /**
+     * Model ID validation.
+     *
+     * @param string $attribute Attribute name
+     * @param array $params Attribute params
+     *
+     * @return mixed
+     */
+    public function validateModelId($attribute, $params)
+    {
+        /** @var ActiveRecord $class */
+        $class = Model::findIdentity($this->model_class);
+        if ($class === null) {
+            $this->addError($attribute, \Yii::t('net_frenzel_communication', 'ERROR_MSG_INVALID_MODEL_ID'));
+        } else {
+            $model = $class->name;
+            if ($model::find()->where(['id' => $this->model_id]) === false) {
+                $this->addError($attribute, \Yii::t('net_frenzel_communication', 'ERROR_MSG_INVALID_MODEL_ID'));
+            }
+        }
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClass()
+    {
+        return $this->hasOne(Model::className(), ['id' => 'entity']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getModel()
+    {
+        /** @var ActiveRecord $class */
+        $class = Model::find()->where(['id' => $this->entity])->asArray()->one();
+        $model = $class->name;
+        return $this->hasOne($model::className(), ['id' => 'entity_id']);
     }
 }

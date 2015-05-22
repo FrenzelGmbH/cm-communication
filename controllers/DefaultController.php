@@ -1,202 +1,151 @@
 <?php
 
-namespace frenzelgmbh\cmcommunication\controllers;
+namespace net\frenzel\communication\controllers;
+
+/**
+ * @author Philipp Frenzel <philipp@frenzel.net> 
+ */
 
 use Yii;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
+use yii\web\Controller;
+use yii\web\HttpException;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use yii\db\Query;
 
-use frenzelgmbh\appcommon\controllers\AppController;
+use \net\frenzel\communication\models\Communication;
 
-use frenzelgmbh\cmcommunication\models\Communication;
-
-class DefaultController extends AppController
+/**
+ * Default Controller
+ */
+class DefaultController extends Controller
 {
-  /**
-   * Set the default layout to the modules view column2
-   * @var string
-   */
-  public $layout = 'column2';
-
-  /**
-   * controlling the different access rights
-   * @return [type] [description]
-   */
-  public function behaviors()
-  {
-    return [
-      'verbs' => [
-        'class' => VerbFilter::className(),
-        'actions' => [
-          'delete' => ['post'],
-        ],
-      ],
-      'AccessControl' => [
-        'class' => '\yii\filters\AccessControl',
-        'rules' => [
-          [
-            'allow'=>true,
-            'actions'=>array(
-              'index',
-              'test',
-              'create',
-              'update',
-              'jscountry'
-            ),
-            'roles'=>array('@'),
-          ],
-          [
-            'allow'=>true,
-            'actions'=>array(              
-              'test',
-              'jscountry',
-              'create'
-            ),
-            'roles'=>array('?'),
-          ]
-        ]
-      ]
-    ];
-  }
-
-  /**
-   * [actionIndex description]
-   * @return [type] [description]
-   */
-	public function actionIndex()
-	{
-    return $this->render('index');
-	}
-
-  /**
-   * [actionTest description]
-   * @return [type] [description]
-   */
-  public function actionTest()
-  {
-    return $this->render('test');
-  }
-
-  /**
-   * [actionCreate description]
-   * @param string module
-   * @param integer id
-   * @return view         [description]
-   */
-  public function actionCreate($module=NULL,$id=NULL){
-    $model = new Communication;
-
-    if ($model->load(Yii::$app->request->post()) && $model->save()) 
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
     {
-      if (\Yii::$app->request->isAjax) 
-      {
-        header('Content-type: application/json');
-        echo Json::encode(['status'=>'DONE','model'=>$model]);
-        exit();
-      }
-      else
-      {
-        return $this->redirect(['view', 'id' => $model->id]);
-      }
-    } 
-    else 
-    {
-      if(!is_null($module) && !is_null($id))
-      {
-        $model->mod_table = $module;
-        $model->mod_id = $id;  
-      }
-      return $this->renderAjax('@frenzelgmbh/cmcommunication/widgets/views/iviews/_form', [
-          'model' => $model,
-      ]);
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'create' => ['post'],
+                'update' => ['put', 'post'],
+                'fetch' =>  ['put', 'post', 'get'],
+                'delete' => ['post', 'delete']
+            ]
+        ];
+        return $behaviors;
     }
-  }
 
-  /**
-   * [actionUpdate description]
-   * @param string module
-   * @param integer id
-   * @return view         [description]
-   */
-  public function actionUpdate($id){
-    $model = $this->findModel($id);
-
-    if ($model->load(Yii::$app->request->post()) && $model->save()) 
+    /**
+     * Create activity.
+     */
+    public function actionCreate()
     {
-      if (\Yii::$app->request->isAjax) 
-      {
-        header('Content-type: application/json');
-        echo Json::encode(['status'=>'DONE','model'=>$model]);
-        exit();
-      }
-      else
-      {
-        return $this->redirect(['view', 'id' => $model->id]);
-      }
-    } 
-    else 
+        $model = new Activity(['scenario' => 'create']);        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($model->save(false)) {
+                    return $this->tree($model);
+                } else {
+                    Yii::$app->response->setStatusCode(500);
+                    return \Yii::t('net_frenzel_communication', 'FRONTEND_FLASH_FAIL_CREATE');
+                }
+            } elseif (Yii::$app->request->isAjax) {
+                Yii::$app->response->setStatusCode(400);
+                return ActiveForm::validate($model);
+            }
+        }
+    }
+
+    /**
+     * Update activity.
+     *
+     * @param integer $id Activity ID
+     * @return mixed
+     */
+    public function actionUpdate($id)
     {
-      if(!is_null($module) && !is_null($id))
-      {
-        $model->mod_table = $module;
-        $model->mod_id = $id;  
-      }
-      return $this->renderAjax('@frenzelgmbh/cmcommunication/widgets/views/iviews/_form', [
-          'model' => $model,
-      ]);
+        $model = $this->findModel($id);
+        $model->setScenario('update');
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($model->save(false)) {
+                    return $this->renderAjax('@vendor/frenzelgmbh/cm-communication/views/widgets/views/_index_single_item', ['model' => $model]);
+                } else {
+                    Yii::$app->response->setStatusCode(500);
+                    return \Yii::t('net_frenzel_communication', 'FRONTEND_FLASH_FAIL_UPDATE');
+                }
+            } elseif (Yii::$app->request->isAjax) {
+                Yii::$app->response->setStatusCode(400);
+                return ActiveForm::validate($model);
+            }
+        }
     }
-  }
 
-  /**
-   * js(on)country returns an json object for the select2 widget
-   * @param  string $search Text for the lookup
-   * @param  integer of the set value
-   * @return json    [description]
-   */
-  public function actionJscountry($search = NULL,$id = NULL)
-  {
-    header('Content-type: application/json');
-    $clean['more'] = false;
-
-    $query = new Query;
-    if(!is_Null($search))
+    /**
+     * fetch activity.
+     *
+     * @param integer $id Activity ID
+     * @return mixed
+     */
+    public function actionFetch($id)
     {
-      $mainQuery = $query->select('id, iso3 AS text')
-        ->from('{{%country}}')
-        ->where('UPPER(iso3) LIKE "%'.strtoupper($search).'%"');
-
-      $command = $mainQuery->createCommand();
-      $rows = $command->queryAll();
-      $clean['results'] = array_values($rows);
+        $model = $this->findModel($id);
+        $model->setScenario('update');
+        Yii::$app->response->format = Response::FORMAT_HTML;
+        $model->next_at = !is_null($model->next_at)?\Yii::$app->formatter->asDateTime($model->next_at,'yyyy-MM-dd hh:mm'):$model->next_at;
+        return $this->renderAjax('@vendor/frenzelgmbh/cm-communication/views/widgets/views/_form_update', ['model' => $model]);
     }
-    else
-    {     
-      if(!is_null($id))
-      {
-        $clean['results'] = ['id'=> $id,'text' => Country::findOne($id)->iso3];
-      }else
-      {
-        $clean['results'] = ['id'=> 0,'text' => 'None found'];
-      }
-    }
-    echo Json::encode($clean);
-    exit();
-  }
 
-  /**
-     * Finds the Communication model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Communication the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+    /**
+     * Delete comment page.
+     *
+     * @param integer $id Comment ID
+     * @return string Comment text
+     */
+    public function actionDelete($id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($this->findModel($id)->deleteActivity()) {
+            return \Yii::t('net_frenzel_communication', 'FRONTEND_WIDGET_COMMENTS_DELETED_COMMENT_TEXT');
+        } else {
+            Yii::$app->response->setStatusCode(500);
+            return \Yii::t('net_frenzel_communication', 'FRONTEND_FLASH_FAIL_DELETE');
+        }
+    }
+
+    /**
+     * Find model by ID.
+     *
+     * @param integer|array $id Comment ID
+     * @return Comment Model
+     * @throws HttpException 404 error if comment not found
      */
     protected function findModel($id)
     {
-        if (($model = Communication::findOne($id)) !== null) {
+        /** @var Comment $model */
+        $model = Communication::findOne($id);
+        if ($model !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new HttpException(404, \Yii::t('net_frenzel_communication', 'FRONTEND_FLASH_RECORD_NOT_FOUND'));
         }
+    }
+
+    /**
+     * @param Comment $model Comment
+     *
+     * @return string Comments list
+     */
+    protected function tree($model)
+    {
+        $models = Activity::getActivities($model->entity_id, $model->entity);
+        return $this->renderPartial('@net/frenzel/activity/views/widgets/views/_index_item', ['models' => $models]);
     }
 
 }
