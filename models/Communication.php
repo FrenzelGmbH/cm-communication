@@ -27,6 +27,47 @@ use yii\helpers\ArrayHelper;
  */
 class Communication extends \yii\db\ActiveRecord
 {
+    const TYPE_CALL = 1;
+    const TYPE_MAIL = 2;
+    const TYPE_SMS = 3;
+    const TYPE_FAX = 5;
+    const TYPE_IM = 7;
+    
+    public static $communicationTypes = [
+        self::TYPE_CALL => 'Call',
+        self::TYPE_MAIL => 'Mail',
+        self::TYPE_SMS => 'SMS',
+        self::TYPE_FAX => 'Fax',
+        self::TYPE_IM => 'Instant Messanger'
+    ];
+
+    public static $communicationTypesIcons = [
+        self::TYPE_CALL => 'phone-square',
+        self::TYPE_MAIL => 'send',
+        self::TYPE_SMS => 'mobile',
+        self::TYPE_FAX => 'fax',
+        self::TYPE_IM => 'skype',
+    ];
+
+    public static function getTypeArray()
+    {
+        return self::$communicationTypes;
+    }
+    
+    public function getTypeAsString()
+    {
+        if(isset(self::$communicationTypes[$this->type]))
+            return self::$communicationTypes[$this->type];
+        return 'finished!';
+    }
+
+    public function getTypeAsIcon()
+    {
+        if(isset(self::$communicationTypesIcons[$this->type]))
+            return self::$communicationTypesIcons[$this->type];
+        return 'asterisk';
+    }
+
     /**
      * @inheritdoc
      */

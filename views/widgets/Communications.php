@@ -47,8 +47,8 @@ class Communications extends Widget
     {
         $class = $this->model;
         $class = $class::className();
-        $models = Activity::getActivities($this->model->id, $class);
-        $model = new Activity(['scenario' => 'create']);
+        $models = Communication::getActivities($this->model->id, $class);
+        $model = new Communication(['scenario' => 'create']);
         $model->customNextTypes = $this->customNextTypes;
         if(!is_null($this->allowedNextTypes))
         {
@@ -56,7 +56,7 @@ class Communications extends Widget
         }
         $model->entity = $class;
         $model->entity_id = $this->model->id;
-        $model->type = Activity::TYPE_CALL;
+        $model->type = Communication::TYPE_CALL;
         $model->next_by = \Yii::$app->user->identity->id;
         return $this->render('index', [
             'models' => $models,
