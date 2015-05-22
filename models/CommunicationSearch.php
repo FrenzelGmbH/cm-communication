@@ -1,6 +1,6 @@
 <?php
 
-namespace frenzelgmbh\cmcommunication\models;
+namespace net\frenzel\communication\models;
 
 use Yii;
 use yii\base\Model;
