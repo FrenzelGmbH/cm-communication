@@ -1,28 +1,27 @@
 <?php
 
-namespace frenzelgmbh\cmcommunication\models;
+namespace net\frenzel\communication\models;
 
-use Yii;
-use yii\behaviors\TimestampBehavior;
+use yii\base\Event;
+use yii\helpers\ArrayHelper;
+
+/**
+ * @author Philipp Frenzel <philipp@frenzel.net> 
+ */
 
 /**
  * This is the model class for table "communication".
+ * @package net\frenzel\communication\models
  *
  * @property integer $id
- * @property string $mobile
- * @property string $phone
- * @property string $fax
- * @property string $email
- * @property integer $user_id
- * @property string $mod_table
- * @property integer $mod_id
- * @property string $system_key
- * @property string $system_name
- * @property integer $system_upate
+ * @property string $entity
+ * @property integer $entity_id
+ * @property integer $type
+ * @property string $text
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property integer $created_at
  * @property integer $updated_at
- * @property integer $deleted_at
- * @property integer $communication_type_id
  *
  * @property CommunicationType $communicationType
  */

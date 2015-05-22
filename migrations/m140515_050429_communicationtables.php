@@ -40,8 +40,8 @@ class m140515_050429_communicationtables extends \yii\db\Migration
       'entity_id'         => Schema::TYPE_INTEGER . ' NOT NULL',
 
       //blamable
-      'created_by'            => Schema::TYPE_INTEGER . ' NOT NULL',
-      'updated_by'            => Schema::TYPE_INTEGER . ' NOT NULL',
+      'created_by'        => Schema::TYPE_INTEGER . ' NOT NULL',
+      'updated_by'        => Schema::TYPE_INTEGER . ' NOT NULL',
       
       // timestamps
       'created_at'        => Schema::TYPE_INTEGER . ' NOT NULL',
