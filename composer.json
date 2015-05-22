@@ -1,13 +1,13 @@
 {
   "name": "frenzelgmbh/cm-communication",
-  "description": "Common Address Module for yii2",
+  "description": "Common Communication Module for yii2",
   "keywords": [
-    "yii2",
-    "address module",
+    "yii",
+    "communication",
     "frenzel gmbh"
   ],
   "type": "yii2-extension",
-  "license": "GPL v2",
+  "license": "MIT",
   "support": {
     "issues": "https://github.com/frenzelgmbh/cm-communication/issues?state=open",
     "source": "https://github.com/frenzelgmbh/cm-communication"
@@ -19,18 +19,17 @@
       "homepage": "http://frenzel.net"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
-    "frenzelgmbh/appcommon":"dev-master",
-    "anthonymartin/geo-location":"dev-master",
-    "willdurand/geocoder": "dev-master",
-    "2amigos/yii2-leaflet-markercluster-plugin": "*",
-    "2amigos/yii2-leaflet-extension": "*",
-    "2amigos/yii2-leaflet-makimarker-plugin": "*"
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "2.0.*",
+    "rmrevin/yii2-fontawesome": "2.8.*",
+    "kartik-v/yii2-widgets": "*",
+    "kartik-v/yii2-datecontrol": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "frenzelgmbh\\cmcommunication\\": ""
+      "net\\frenzel\\communication\\": ""
     }
   }
 }
