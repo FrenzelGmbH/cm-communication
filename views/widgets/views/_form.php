@@ -24,30 +24,17 @@ use kartik\widgets\Select2;
     ]
 ) ?>
 
-<div class="row" data-communication="form-group">
-    <div class="col-sm-6">
-        <?= $form->field($model, 'type')->radioButtonGroup($model->TypeArray,[
-                //'class' => 'btn-group-sm',
-                'itemOptions' => ['labelOptions' => ['class' => 'btn btn-default']]
-            ])->label(false);?>
-         <?= Html::error($model, 'type', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
-    </div>
-    <div class="col-sm-6">
-        <?= yii\widgets\MaskedInput::widget([
-                'model' => $model,
-                'attribute' => 'text',
-                'mask' => ['+99-999-99999999', '9999-999-99999999'],
-                'options' => ['class' => 'input-m'],
-            ]);?>
-        <?= Html::error($model, 'text', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <?= Html::submitButton('<i class="fa fa-check"></i> ' . \Yii::t('net_frenzel_communication', 'submit'), ['class' => 'btn btn-success btn-m']); ?>
-    </div>
-</div>
+<?= $form->field($model, 'type')->radioButtonGroup($model->TypeArray,[
+        //'class' => 'btn-group-sm',
+        'itemOptions' => ['labelOptions' => ['class' => 'btn btn-default btn-xs']]
+    ]);?>
+ <?= Html::error($model, 'type', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
+
+<?= $form->field($model, 'text')->label(false); ?>
+<?= Html::error($model, 'text', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
+
+<?= Html::submitButton('<i class="fa fa-check"></i> ' . \Yii::t('net_frenzel_communication', 'submit'), ['class' => 'btn btn-success btn-xs']); ?>
 
 <?= Html::activeHiddenInput($model, 'entity') ?>
 <?= Html::activeHiddenInput($model, 'entity_id') ?>

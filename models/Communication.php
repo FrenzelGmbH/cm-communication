@@ -120,7 +120,7 @@ class Communication extends \yii\db\ActiveRecord
             'id'         => \Yii::t('app', 'ID'),
             'text'       => \Yii::t('app', 'Text'),
             'entity'     => \Yii::t('app', 'Entity'),
-            'type'       => \Yii::t('app', 'Current Type'),
+            'type'       => \Yii::t('app', 'Type'),
             'created_by' => \Yii::t('app', 'Created by'),
             'updated_by' => \Yii::t('app', 'Updated by'),
             'created_at' => \Yii::t('app', 'Created at'),
