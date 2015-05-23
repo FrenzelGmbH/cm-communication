@@ -38,7 +38,7 @@ use kartik\widgets\Select2;
         <?= Html::error($model, 'text', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
     </div>
     <div class="col-sm-3">
-        <?= Html::submitButton('<i class="fa fa-plus"></i> ' . \Yii::t('net_frenzel_communication', 'add'), 
+        <?= Html::submitButton('<i class="fa fa-plus"></i> ' . \Yii::t('net_frenzel_communication', 'update'), 
             ['class' => 'btn btn-success btn-sm']
         ); ?>     
     </div>
