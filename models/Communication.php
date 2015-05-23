@@ -4,6 +4,7 @@ namespace net\frenzel\communication\models;
 
 use yii\base\Event;
 use yii\helpers\ArrayHelper;
+use net\frenzel\communication\models\scopes\CommunicationQuery;
 
 /**
  * @author Philipp Frenzel <philipp@frenzel.net> 
@@ -75,6 +76,15 @@ class Communication extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%net_frenzel_communication}}';
+    }
+
+    /**
+     * @inheritdoc
+     * @return MandantenQuery
+     */
+    public static function find()
+    {
+        return new CommunicationQuery(get_called_class());
     }
 
     /**
@@ -160,7 +170,7 @@ class Communication extends \yii\db\ActiveRecord
         $models = self::find()->where([
             'entity_id' => $model,
             'entity' => $class
-        ])->orderBy('{{%net_frenzel_communication}}.created_at DESC')->with(['author'])->all();
+        ])->orderBy('{{%net_frenzel_communication}}.created_at DESC')->active()->with(['author'])->all();
         
         return $models;
     }
