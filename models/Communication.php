@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property CommunicationType $communicationType
  */
+
 class Communication extends \yii\db\ActiveRecord
 {
     const TYPE_CALL = 1;
@@ -46,7 +47,7 @@ class Communication extends \yii\db\ActiveRecord
         self::TYPE_MAIL => 'send',
         self::TYPE_SMS => 'mobile',
         self::TYPE_FAX => 'fax',
-        self::TYPE_IM => 'skype',
+        self::TYPE_IM => 'skype'
     ];
 
     public static function getTypeArray()
@@ -93,7 +94,7 @@ class Communication extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            'create' => ['type', 'entity', 'entity_id', 'text', 'type'],
+            'create' => ['type', 'entity', 'entity_id', 'text'],
             'update' => ['type' ,'text'],
         ];
     }
@@ -145,8 +146,7 @@ class Communication extends \yii\db\ActiveRecord
     public function deleteCommunication()
     {
         $this->touch('deleted_at');
-        $this->text = '';
-        return $this->save(false, ['deleted_at', 'text']);
+        return $this->save(false, ['deleted_at']);
     }
 
     /**
@@ -161,7 +161,7 @@ class Communication extends \yii\db\ActiveRecord
             'entity_id' => $model,
             'entity' => $class
         ])->orderBy('{{%net_frenzel_communication}}.created_at DESC')->with(['author'])->all();
-
+        
         return $models;
     }
 

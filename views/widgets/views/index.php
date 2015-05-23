@@ -13,11 +13,14 @@
 
 <div id="communication">
 
-<?php if (!\Yii::$app->user->isGuest) : ?>	        
-    <?= $this->render('_form', ['model' => $model]); ?>
-<?php endif; ?>		
 <!--/ #communication-list -->
 <div id="communication-list" data-communication="list">
     <?= $this->render('_index_item', ['models' => $models]) ?>
 </div>
 <!--/ #communication-list -->		
+
+<?php if (!\Yii::$app->user->isGuest) : ?>	        
+    <?= $this->render('_form', ['model' => $model]); ?>
+<?php endif; ?>
+
+</div>
