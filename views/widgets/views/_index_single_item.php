@@ -35,7 +35,7 @@ use yii\helpers\Url;
                                 <a href="#" data-communication="delete" data-communication-id="<?= $model->id ?>" data-communication-url="<?= Url::to([
                                     '/communication/default/delete',
                                     'id' => $model->id
-                                ]) ?>" data-communication-confirm="<?= \Yii::t('net_frenzel_communication', 'FRONTEND_WIDGET_COMMUNICATION_DELETE_CONFIRMATION') ?>">
+                                ]) ?>" data-confirm="<?= \Yii::t('net_frenzel_communication', 'FRONTEND_WIDGET_COMMUNICATION_DELETE_CONFIRMATION') ?>">
                                     <i class="fa fa-remove"></i> <?= \Yii::t('app', 'd') ?>
                                 </a>
                             <?php } ?>
