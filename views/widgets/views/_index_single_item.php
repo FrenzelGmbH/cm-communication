@@ -20,18 +20,16 @@ use yii\helpers\Url;
                 <div class="col-sm-3">
                     <?php if (is_null($model->deleted_at)) { ?>
                         <div data-communication="tools">
-                            <?php if (Yii::$app->user->identity->isAdmin) { ?>
-                                &nbsp;
-                                <a href="#" data-communication="update" data-communication-id="<?= $model->id ?>" data-communication-url="<?= Url::to([
-                                    '/communication/default/update',
-                                    'id' => $model->id
-                                ]) ?>" data-communication-fetch-url="<?= Url::to([
-                                    '/communication/default/fetch',
-                                    'id' => $model->id
-                                ]) ?>">
-                                    <i class="fa fa-pencil"></i> <?= \Yii::t('app', 'u') ?>
-                                </a>
-                            <?php } ?>
+                            &nbsp;
+                            <a href="#" data-communication="update" data-communication-id="<?= $model->id ?>" data-communication-url="<?= Url::to([
+                                '/communication/default/update',
+                                'id' => $model->id
+                            ]) ?>" data-communication-fetch-url="<?= Url::to([
+                                '/communication/default/fetch',
+                                'id' => $model->id
+                            ]) ?>">
+                                <i class="fa fa-pencil"></i> <?= \Yii::t('app', 'u') ?>
+                            </a>
                             <?php if (Yii::$app->user->identity->isAdmin) { ?>
                                 &nbsp;
                                 <a href="#" data-communication="delete" data-communication-id="<?= $model->id ?>" data-communication-url="<?= Url::to([

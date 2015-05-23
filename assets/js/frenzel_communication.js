@@ -132,6 +132,7 @@
                 $(data.listSelector).html(response);
                 $.communication('clearErrors', $this);
                 $this.trigger('reset');
+                $('#container_net_frenzel_communication_form').hide( 2000 );
             }
         });
     });
