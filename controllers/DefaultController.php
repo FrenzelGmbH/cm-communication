@@ -40,11 +40,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * Create activity.
+     * Create Communication.
      */
     public function actionCreate()
     {
-        $model = new Activity(['scenario' => 'create']);        
+        $model = new Communication(['scenario' => 'create']);        
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -62,9 +62,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * Update activity.
+     * Update Communication.
      *
-     * @param integer $id Activity ID
+     * @param integer $id Communication ID
      * @return mixed
      */
     public function actionUpdate($id)
@@ -88,9 +88,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * fetch activity.
+     * fetch Communication.
      *
-     * @param integer $id Activity ID
+     * @param integer $id Communication ID
      * @return mixed
      */
     public function actionFetch($id)
@@ -98,7 +98,6 @@ class DefaultController extends Controller
         $model = $this->findModel($id);
         $model->setScenario('update');
         Yii::$app->response->format = Response::FORMAT_HTML;
-        $model->next_at = !is_null($model->next_at)?\Yii::$app->formatter->asDateTime($model->next_at,'yyyy-MM-dd hh:mm'):$model->next_at;
         return $this->renderAjax('@vendor/frenzelgmbh/cm-communication/views/widgets/views/_form_update', ['model' => $model]);
     }
 
@@ -111,7 +110,7 @@ class DefaultController extends Controller
     public function actionDelete($id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        if ($this->findModel($id)->deleteActivity()) {
+        if ($this->findModel($id)->deleteCommunication()) {
             return \Yii::t('net_frenzel_communication', 'FRONTEND_WIDGET_COMMENTS_DELETED_COMMENT_TEXT');
         } else {
             Yii::$app->response->setStatusCode(500);
@@ -144,8 +143,8 @@ class DefaultController extends Controller
      */
     protected function tree($model)
     {
-        $models = Activity::getActivities($model->entity_id, $model->entity);
-        return $this->renderPartial('@net/frenzel/activity/views/widgets/views/_index_item', ['models' => $models]);
+        $models = Communication::getCommunications($model->entity_id, $model->entity);
+        return $this->renderPartial('@net/frenzel/communication/views/widgets/views/_index_item', ['models' => $models]);
     }
 
 }

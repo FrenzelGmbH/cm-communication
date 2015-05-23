@@ -47,17 +47,10 @@ class Communications extends Widget
     {
         $class = $this->model;
         $class = $class::className();
-        $models = Communication::getActivities($this->model->id, $class);
+        $models = Communication::getCommunications($this->model->id, $class);
         $model = new Communication(['scenario' => 'create']);
-        $model->customNextTypes = $this->customNextTypes;
-        if(!is_null($this->allowedNextTypes))
-        {
-            $model->allowed_next_type = $this->allowedNextTypes;
-        }
         $model->entity = $class;
         $model->entity_id = $this->model->id;
-        $model->type = Communication::TYPE_CALL;
-        $model->next_by = \Yii::$app->user->identity->id;
         return $this->render('index', [
             'models' => $models,
             'model' => $model
@@ -71,7 +64,7 @@ class Communications extends Widget
     {
         $view = $this->getView();
         $options = Json::encode($this->jsOptions);
-        //Asset::register($view);
-        //$view->registerJs('jQuery.activity(' . $options . ');');
+        Asset::register($view);
+        $view->registerJs('jQuery.communication(' . $options . ');');
     }
 }

@@ -34,11 +34,11 @@ class Communication extends \yii\db\ActiveRecord
     const TYPE_IM = 7;
     
     public static $communicationTypes = [
-        self::TYPE_CALL => 'Call',
+        self::TYPE_CALL => 'Phone',
         self::TYPE_MAIL => 'Mail',
-        self::TYPE_SMS => 'SMS',
+        self::TYPE_SMS => 'Mobile',
         self::TYPE_FAX => 'Fax',
-        self::TYPE_IM => 'Instant Messanger'
+        self::TYPE_IM => 'IM'
     ];
 
     public static $communicationTypesIcons = [
@@ -133,7 +133,7 @@ class Communication extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        $Module = \Yii::$app->getModule('activity');
+        $Module = \Yii::$app->getModule('communication');
         return $this->hasOne($Module->userIdentityClass, ['id' => 'created_by']);
     }
 
@@ -147,6 +147,22 @@ class Communication extends \yii\db\ActiveRecord
         $this->touch('deleted_at');
         $this->text = '';
         return $this->save(false, ['deleted_at', 'text']);
+    }
+
+    /**
+     * [getCommunications description]
+     * @param  [type] $model [description]
+     * @param  [type] $class [description]
+     * @return [type]        [description]
+     */
+    public static function getCommunications($model, $class)
+    {
+        $models = self::find()->where([
+            'entity_id' => $model,
+            'entity' => $class
+        ])->orderBy('{{%net_frenzel_communication}}.created_at DESC')->with(['author'])->all();
+
+        return $models;
     }
 
     /**

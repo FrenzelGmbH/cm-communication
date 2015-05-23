@@ -27,7 +27,9 @@ class CoreAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $js = [];
+    public $js = [
+        'js/frenzel_communication.js'
+    ];
     
     /**
      * @inheritdoc
