@@ -14,8 +14,14 @@ use yii\helpers\Url;
             <div data-communication="content">
             <div class="row">
                 <div class="col-sm-9">
+                <?php if (!is_null($model->deleted_at)) { ?>
+                    <div style="color:red">
+                <?php } ?>
                     <i class="fa fa-<?= $model->TypeAsIcon; ?>"></i> 
                     <?= $model->text ?>
+                <?php if (!is_null($model->deleted_at)) { ?>
+                    </div>
+                <?php } ?>
                 </div>
                 <div class="col-sm-3">
                     <?php if (is_null($model->deleted_at)) { ?>
