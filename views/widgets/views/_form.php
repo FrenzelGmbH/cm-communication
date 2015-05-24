@@ -18,7 +18,11 @@ use kartik\widgets\Select2;
 $script = <<<SKRIPT
 
 $('#net-communication-create-s').click(function() {
-    $('#container_net_frenzel_communication_form').show( 2000 );
+    $('#container_net_frenzel_communication_form').show( 1000 );
+});
+
+$('#net-communication-create-c').click(function() {
+    $('#container_net_frenzel_communication_form').hide( 1000 );
 });
 
 SKRIPT;
@@ -48,7 +52,7 @@ $this->registerJs($script);
 <?= $form->field($model, 'type')->radioButtonGroup($model->TypeArray,[
         'itemOptions' => ['labelOptions' => ['class' => 'btn btn-default btn-sm']]
     ])->label(false);?>
- <?= Html::error($model, 'type', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?>
+ <?= Html::error($model, 'type', ['data-communication' => 'form-summary', 'class' => 'help-block hidden']) ?> 
 
 <div class="row">
     <div class="col-sm-9">
@@ -61,6 +65,10 @@ $this->registerJs($script);
         ); ?>     
     </div>
 </div>
+
+<div class="clear-fix"></div>
+
+<div id="net-communication-create-c" class="pull-right"><small>x <?= \Yii::t('net_frenzel_communication','close'); ?></small></div>
 
 <?= Html::activeHiddenInput($model, 'entity') ?>
 <?= Html::activeHiddenInput($model, 'entity_id') ?>
