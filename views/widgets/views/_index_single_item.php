@@ -18,7 +18,7 @@ use yii\helpers\Url;
                     <div style="color:red">
                 <?php } ?>
                     <i class="fa fa-<?= $model->TypeAsIcon; ?>"></i> 
-                    <?= $model->text ?>
+                    <?= $model->TextAsLink; ?>
                 <?php if (!is_null($model->deleted_at)) { ?>
                     </div>
                 <?php } ?>

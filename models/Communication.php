@@ -4,6 +4,7 @@ namespace net\frenzel\communication\models;
 
 use yii\base\Event;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use net\frenzel\communication\models\scopes\CommunicationQuery;
 
 /**
@@ -214,5 +215,23 @@ class Communication extends \yii\db\ActiveRecord
         $class = Model::find()->where(['id' => $this->entity])->asArray()->one();
         $model = $class->name;
         return $this->hasOne($model::className(), ['id' => 'entity_id']);
+    }
+
+    /**
+     * [getTextAsLink description]
+     * @return [type] [description]
+     */
+    public function getTextAsLink()
+    {
+        $html = '';
+        if($this->type == self::TYPE_CALL)
+        {
+            $html .= Html::a($this->text,'tel:'.$this->text,['target' => '_blank']);
+        }
+        else
+        {
+            $html .= $this->text;
+        }
+        return $html;
     }
 }
