@@ -192,7 +192,7 @@ class Communication extends \yii\db\ActiveRecord
             $this->addError($attribute, \Yii::t('net_frenzel_communication', 'ERROR_MSG_INVALID_MODEL_ID'));
         } else {
             $model = $class->name;
-            if ($model::find()->where(['id' => $this->model_id]) === false) {
+            if ($model::find()->where(['id' => $this->entity_id]) === false) {
                 $this->addError($attribute, \Yii::t('net_frenzel_communication', 'ERROR_MSG_INVALID_MODEL_ID'));
             }
         }
