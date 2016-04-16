@@ -20,6 +20,7 @@ use net\frenzel\communication\models\scopes\CommunicationQuery;
  * @property integer $entity_id
  * @property integer $type
  * @property string $text
+ * @property integer $isMain
  * @property integer $created_by
  * @property integer $updated_by
  * @property integer $created_at
@@ -98,7 +99,7 @@ class BaseCommunication extends \yii\db\ActiveRecord
         return [
             [['text'], 'required'],
             [['text','entity'], 'string'],
-            [['created_by', 'updated_by', 'created_at', 'updated_at','deleted_at','entity_id','type'], 'integer'],
+            [['created_by', 'updated_by', 'created_at', 'updated_at','deleted_at','entity_id','type', 'isMain'], 'integer'],
         ];
     }
 
@@ -112,6 +113,7 @@ class BaseCommunication extends \yii\db\ActiveRecord
             'text'       => \Yii::t('app', 'Text'),
             'entity'     => \Yii::t('app', 'Entity'),
             'type'       => \Yii::t('app', 'Type'),
+            'isMain'     => \Yii::t('app', 'Main'),
             'created_by' => \Yii::t('app', 'Created by'),
             'updated_by' => \Yii::t('app', 'Updated by'),
             'created_at' => \Yii::t('app', 'Created at'),
