@@ -27,4 +27,13 @@ class CommunicationQuery extends ActiveQuery
         return $this;
     }
 
+    /**
+     * @return $this
+     */
+    public function isMain()
+    {
+        $this->andWhere(['isMain' => 1]);
+        return $this;
+    }
+
 }
